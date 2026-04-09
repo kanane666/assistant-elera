@@ -221,7 +221,7 @@
         messages.innerHTML += `<div class="typing" id="typing">Awa écrit...</div>`;
         messages.scrollTop = messages.scrollHeight;
 
-        const res = await fetch("http://localhost:3000/chat", {
+        const res = await fetch("https://assistant-elera.onrender.com/chat", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ historique }),
