@@ -196,30 +196,30 @@
       );
 
       // Reafficher l'historique au chargement
-      window.onload = () => {
-        const messages = document.getElementById("messages");
-        historique.forEach((msg) => {
-          if (msg.role === "user") {
-            messages.innerHTML += `<div class="message user">${msg.content}</div>`;
-          } else if (msg.role === "assistant") {
-            messages.innerHTML += `<div class="message awa">${msg.content}</div>`;
+      window.onload = () => {   // quand la page est chargée
+        const messages = document.getElementById("messages"); // trouve la zone de chat
+        historique.forEach((msg) => { // pour chaque message sauvegardé
+          if (msg.role === "user") { // si c'est un message de l'utilisateur
+            messages.innerHTML += `<div class="message user">${msg.content}</div>`; // affiche à droite en bleu
+          } else if (msg.role === "assistant") { // si c'est un message de l'assistant awa
+            messages.innerHTML += `<div class="message awa">${msg.content}</div>`; // affiche à gauche en gris
           }
         });
-        messages.scrollTop = messages.scrollHeight;
+        messages.scrollTop = messages.scrollHeight; // faire défiler vers le bas pour voir les derniers messages
       };
 
       async function envoyer() {
-        const input = document.getElementById("input");
-        const messages = document.getElementById("messages");
-        const texte = input.value.trim();
-        if (!texte) return;
+        const input = document.getElementById("input"); // le champ de saisie
+        const messages = document.getElementById("messages"); // la zone de chat
+        const texte = input.value.trim(); // le texte tapé, sans espaces
+        if (!texte) return; // si le texte est vide, ne rien faire
 
-        messages.innerHTML += `<div class="message user">${texte}</div>`;
-        historique.push({ role: "user", content: texte });
-        input.value = "";
+        messages.innerHTML += `<div class="message user">${texte}</div>`; // afficher le message de l'utilisateur à droite en bleu
+        historique.push({ role: "user", content: texte }); // ajouter le message à l'historique en mémoire
+        input.value = ""; // vider le champ de saisie
 
-        messages.innerHTML += `<div class="typing" id="typing">Awa écrit...</div>`;
-        messages.scrollTop = messages.scrollHeight;
+        messages.innerHTML += `<div class="typing" id="typing">Awa écrit...</div>`; // afficher un message de "Awa écrit..." pendant que l'on attend la réponse
+        messages.scrollTop = messages.scrollHeight; // faire défiler vers le bas pour voir le message de "Awa écrit..."
 
         const res = await fetch("https://assistant-elera.onrender.com/chat", {
           method: "POST",

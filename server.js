@@ -3,10 +3,10 @@ import cors from "cors";
 import "dotenv/config";
 import Groq from "groq-sdk";
 
-const app = express();
-app.use(cors());
-app.use(express.json());
-app.use(express.static("."));
+const app = express();   // je crée le serveur
+app.use(cors());         // j'autorise Netlify à me parler
+app.use(express.json()); // je sais lire le JSON qui arrive
+app.use(express.static("."));// je sers les fichiers HTML/CSS/JS
 
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
